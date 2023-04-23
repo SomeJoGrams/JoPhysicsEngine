@@ -1,0 +1,47 @@
+Begriffe:
+	- Rigid Body -> hat informationen wie masse, bewegung, Position , Orientierung
+	- Collider -> Objekte die Physikalische Effekte erfahren, als zusammen gekettet gesehen
+	- Collision -> collider sind kollidieren wenn sie sich berühren
+	- Kontakt -> punkt wo sie sich treffen
+	- Kontakt Maniford -> Vereinfachung des Schnittes an dem sich die Objekte berühren
+
+Woraus besteht ein Physics Engine:
+	- 1 Schritt besteht aus:
+		○ Boradphase -> testet ob es für Collider mglich ist sich zu treffen, Methoden: Explizites Gitter, Implizites Gitter,seep und prune, dynmaische AABB Bäume
+		○ Kollisions Erkennung -> testet ob die Collider sich wirklich treffen, Methoden: GJK Algorithmus, MPR Algorithmus (funktionieren nur mit Convexen Formen
+		○ Auslösung -> auflösen der Kollisionen, Physics Engine versucht Fehler zu Fixen, GJK sagt ob 2 Kollider treffen und EPA generiert die benötigten Kontakt Informationen
+	- Sequentielle Impulse: 
+		- 	effiziente Methode für Gauss Seidel LCP Methode, um nicht gelöste Constraints zu Fixen
+		-	als Gleichheits Constainrts modelliert
+
+1. Fundamentales:
+	- Position und Orientierung = Positionale Eigenschaften
+	- Position als Vektor darstellbar und Orientierung als 3d vektor zusammen Quaternion -> 3 mal 3 Matrix
+	Lineare und Angulare Beschleunigung:
+	in 2 D:
+	-	die Rate der Änderung einer Position: Formel nach Euler: x(t+dt) = x(t)+v(t)*d*t
+	-	die Änderung der Orientierung ist nach Euler o(t + dt) = o(t)+w(t)*dt
+	in 3 D:
+	-	Orientierung schwieriger: anguläre Geschwindigkeit wird zu Rotations Matrix und and die Orientierungs Matrix gehangen:
+		Formel: o(t+dt) = R(w^(t), |w(t)| dt)*o(t),
+		mit w^(t) ist w normalisiert, |w(t)| ist die Mächtigkeit von w(t) und R(n^, delta) ist die Winkel Axen Rotations Matrix)
+	Kraft und Drehmoment:
+	-	T(t) = r(t) X F(T)
+	-	mit r(t) ist das Zentrum der Masse vom Kraft wirkenden Punkt
+	Masse und Moment von Trägheit:
+	-	Moment von Inertia der anguläre Gegenpart von Masse
+	-	zeigt wie schwirig es ist Objekt zu rotieren
+	-	meist in 3 x 3 matrix -> inertia tensor, als I bezeichnet
+	- 	In^ = pow(n^, T) * I * n^
+	-	pow(n^T, ist Transponierte Zeulen Vektor n^)
+	-	für Formen berechenbar http://allenchou.net/wp-content/ql-cache/quicklatex.com-4e33a97f2bd408c76e0de2c1a08598c5_l3.svg 
+	-> mit x,y,z relative Koodinaten zum Referenz Punkt, roh = dichte von dV
+	Lineares Moment und Angulares Moment:
+	-	LinearesMoment Masse * Geschwindigkeit
+	- Anguläres ist Intertia Tensor mal Anguläre Beschleunigung
+	Lineare Impulse und Angulare Impulse:
+	-	integral über Kraft und Torque über Zeit sidn als lineare Impulse defiiert dP = F(t)* dt
+	und Angulares Moment: dL = T(t)*dt
+	- um lineare Beschleunigung zu ändern wird dieser geteilt durch Masse: dv = pow(m,-1) * dP
+	- für anguläre Beschleunigung: dw = Q * pow(I, -1) * Q(transponiert) * dL
+	- 

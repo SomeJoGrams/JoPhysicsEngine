@@ -1,0 +1,6 @@
+extern/* # TODO add as git submodle
+extern
+oldCode
+.vscode
+build/*
+BasicsZuPhysicsEngines/* # only contains some basic collision mechanisms
