@@ -3,4 +3,4 @@ extern
 oldCode
 .vscode
 build/*
-BasicsZuPhysicsEngines/* # only contains some basic collision mechanisms
+BasicsZuPhysicsEngines # only contains some basic collision mechanisms
