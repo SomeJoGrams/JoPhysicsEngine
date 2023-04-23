@@ -4,3 +4,4 @@ oldCode
 .vscode
 build/*
 BasicsZuPhysicsEngines # only contains some basic collision mechanisms
+BasicsZuPhysicsEngines/*
